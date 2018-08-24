@@ -18,6 +18,8 @@ HOST=pg
 PORT=5432
 ```
 
+then run:
+
 ```sh
 docker pull 3dwardsharp/ecotopia-today-mapseed
 docker-compose up
