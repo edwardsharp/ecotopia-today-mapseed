@@ -23,7 +23,7 @@ then run:
 ```sh
 docker pull 3dwardsharp/ecotopia-today-mapseed
 docker-compose up
-docker exec -it ecotopia-today-mapseed_mapseed_1 /bin/bash
+docker exec -it ecotopia-today-mapseed_api_1 /bin/bash
 src/manage.py migrate
 src/manage.py createsuperuser
 ```

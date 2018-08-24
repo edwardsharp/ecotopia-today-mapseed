@@ -29,7 +29,7 @@ server {
   include /etc/nginx/snippets/ssl.conf;
 
   location / {
-    proxy_pass http://mapseed:8000;
+    proxy_pass http://app:8000;
     client_max_body_size 100m;
     proxy_buffering off;
   }
@@ -44,7 +44,7 @@ server {
   include /etc/nginx/snippets/ssl.conf;
 
   location / {
-    proxy_pass http://mapseed:8010;
+    proxy_pass http://api:8010;
     client_max_body_size 100m;
     proxy_buffering off;
   }

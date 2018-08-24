@@ -1,6 +1,6 @@
 version: "2"
 services:
-  mapseed:
+  api:
     image: 3dwardsharp/ecotopia-today-mapseed
     build: ./
     # restart: always
