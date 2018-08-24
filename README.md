@@ -19,7 +19,7 @@ PORT=5432
 ```
 
 ```sh
-docker pull 3dwardsharp/mapseed
+docker pull 3dwardsharp/ecotopia-today-mapseed
 docker-compose up
 docker exec -it ecotopia-today-mapseed_mapseed_1 /bin/bash
 src/manage.py migrate

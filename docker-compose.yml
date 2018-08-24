@@ -1,7 +1,7 @@
 version: "2"
 services:
   mapseed:
-    image: 3dwardsharp/mapseed
+    image: 3dwardsharp/ecotopia-today-mapseed
     build: ./
     # restart: always
     env_file: .env
