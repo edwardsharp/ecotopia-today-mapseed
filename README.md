@@ -16,6 +16,12 @@ PASS=someRANDOMpassword
 USERNAME=mapseeduser
 HOST=pg
 PORT=5432
+SOCIAL_AUTH_TWITTER_KEY=
+SOCIAL_AUTH_TWITTER_SECRET=
+SOCIAL_AUTH_FACEBOOK_KEY=
+SOCIAL_AUTH_FACEBOOK_SECRET=
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=
 ```
 
 then run:
@@ -29,3 +35,13 @@ src/manage.py createsuperuser
 ```
 
 visit http://localhost:8010/admin
+
+
+### misc 
+
+make docker start on system start 
+
+```sh
+sudo systemctl enable docker.service
+sudo systemctl start docker.service
+```
