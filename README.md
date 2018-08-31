@@ -48,4 +48,4 @@ sudo systemctl start docker.service
 
 #### nginx.template: 
 
-note the `comand` for the web (3dwardsharp/nginx-certbot) instance in `docker-compose.yml`: `command: /bin/bash -c "envsubst '$${BASE_SERVER},$${ADMIN_SERVER}' < /etc/nginx/conf.d/nginx.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"` you need to explicitly tell `envsubst` about the variables to substitute like `'$${BASE_SERVER},$${ADMIN_SERVER}'` note the `$$`.
+note the `comand` for the web (3dwardsharp/nginx-certbot) instance in `docker-compose.yml`: `command: /bin/bash -c "envsubst '$${BASE_SERVER},$${ADMIN_SERVER}' < /etc/nginx/conf.d/nginx.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"` you need to explicitly tell `envsubst` about the variables to substitute like `'$${BASE_SERVER},$${ADMIN_SERVER}'` note the `$$`. otherwise envsubst will replace other `$` variables in nginx.template with blank strings.
