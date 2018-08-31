@@ -39,9 +39,13 @@ visit http://localhost:8010/admin
 
 ### misc 
 
-make docker start on system start 
+#### make docker start on system start 
 
 ```sh
 sudo systemctl enable docker.service
 sudo systemctl start docker.service
 ```
+
+#### nginx.template: 
+
+note the `comand` for the web (3dwardsharp/nginx-certbot) instance in `docker-compose.yml`: `command: /bin/bash -c "envsubst '$${BASE_SERVER},$${ADMIN_SERVER}' < /etc/nginx/conf.d/nginx.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"` you need to explicitly tell `envsubst` about the variables to substitute like `'$${BASE_SERVER},$${ADMIN_SERVER}'` note the `$$`.

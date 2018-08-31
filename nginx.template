@@ -1,7 +1,7 @@
 server {
   listen 80;
   server_name ${BASE_SERVER};
-  
+
   include /etc/nginx/snippets/letsencrypt.conf;
 
   location / {
@@ -29,12 +29,7 @@ server {
   include /etc/nginx/snippets/ssl.conf;
 
   location / {
-    proxy_set_header X-Forwarded-Host $host:$server_port;
-    proxy_set_header X-Forwarded-Server $host;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_pass http://app:8000;
-    client_max_body_size 100m;
-    proxy_buffering off;
+    root /mississippi;
   }
 }
 server {
@@ -47,33 +42,32 @@ server {
   include /etc/nginx/snippets/ssl.conf;
 
   location / {
-    proxy_set_header X-Forwarded-Host $host:$server_port;
-    proxy_set_header X-Forwarded-Server $host;
+    if ($request_method = 'OPTIONS') {
+      add_header 'Access-Control-Allow-Origin' 'https://${BASE_SERVER}';
+      add_header Access-Control-Allow-Methods 'GET, HEAD, OPTIONS, TRACE, PUT, POST, DELETE, PATCH, CONNECT';
+      add_header Access-Control-Allow-Headers 'content-type, *';
+      add_header Access-Control-Allow-Credentials 'true';
+      add_header 'Access-Control-Max-Age' 1728000;
+      add_header 'Content-Type' 'text/plain; charset=utf-8';
+      add_header 'Content-Length' 0;
+      return 204;
+    }
+
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Forwarded-Proto https;
+    proxy_redirect off;
+
     proxy_pass http://api:8010;
     client_max_body_size 100m;
     proxy_buffering off;
   }
-
   location /static/ {
-    alias /home/core/api_static ;
+    alias /api/static/;
     expires max;
   }
   gzip on;
   gzip_types
       text/plain text/html text/css text/csv
       application/json application/javascript;
-  # error_page 411 = @cors;
-  # location @cors {
-  #   if ($request_method = 'OPTIONS') {
-  #     add_header 'Access-Control-Allow-Origin' 'ecotopia.today';
-  #     add_header 'Access-Control-Allow-Methods' 'GET, HEAD, OPTIONS, TRACE, PUT, POST, DELETE, PATCH, CONNECT';
-  #     add_header 'Access-Control-Allow-Headers' 'content-type, *';
-  #     add_header 'Access-Control-Allow-Credentials' 'true';
-  #     add_header 'Content-Length' 0;
-  #     add_header 'Content-Type' 'text/plain';
-  #     return 200;
-  #   }
-  #   return 411;
-  # }
 }
